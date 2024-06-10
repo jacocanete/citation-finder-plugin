@@ -81,8 +81,6 @@ function CitationFinder() {
     });
   }
 
-  console.log(time);
-
   function handleSubmit(e) {
     e.preventDefault();
     getResults(formData.keyword);

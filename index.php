@@ -222,6 +222,12 @@ class LocalWizEnhancements
         add_options_page('LocalWiz Enhancements', 'LocalWiz Enhancements', 'manage_options', 'localwiz-enhancements', array($this, 'localwiz_enhancements_page'));
     }
 
+    function echo_plugin_version()
+    {
+        $plugin_data = get_plugin_data(__FILE__);
+        echo $plugin_data['Version'];
+    }
+
     function localwiz_enhancements_page()
     { ?>
         <div class="wrap">
@@ -234,6 +240,8 @@ class LocalWizEnhancements
                 submit_button();
                 ?>
             </form>
+            <h3>Version</h3>
+            <p>Version: <?php $this->echo_plugin_version(); ?></p>
         </div>
     <?php }
 }

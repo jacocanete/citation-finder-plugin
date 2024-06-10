@@ -11700,7 +11700,6 @@ function CitationFinder() {
       [e.target.name]: e.target.value
     });
   }
-  console.log(time);
   function handleSubmit(e) {
     e.preventDefault();
     getResults(formData.keyword);
