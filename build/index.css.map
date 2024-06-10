@@ -1,0 +1,1 @@
+{"version":3,"file":"index.css","mappings":";;;AAAA;EACE;EACA;EACA;EACA;EACA;AACF,C","sources":["webpack://lw-enhancements/./src/index.scss"],"sourcesContent":[".cf-edit-block {\r\n  padding: 20px;\r\n  border: 1px solid #e5e5e5;\r\n  border-radius: 5px;\r\n  background-color: #d6d6d6;\r\n  text-align: center;\r\n}\r\n"],"names":[],"sourceRoot":""}
