@@ -3,7 +3,7 @@
 /*
 Plugin Name: LocalWiz Enhancements
 Description: Enhancements for LocalWiz
-Version: 1.1
+Version: 1.2
 Author: Jaco Gagarin Canete
 Author URI: jaco-portfolio.me
 */
@@ -17,10 +17,12 @@ class LocalWizEnhancements
 {
     function __construct()
     {
+        $this->page_id_to_modify = null;
+
         add_action('admin_menu', array($this, 'localwiz_enhancements_menu'));
         add_action('admin_init', array($this, 'localwiz_enhancements_settings'));
         add_action('init', array($this, 'localwiz_enhancements_assets'));
-
+        add_action('wp_head', array($this, 'remove_header_footer_css'));
 
         // Add REST API endpoint http://gosystem7.local/wp-json/localwiz-enhancements/v1/citation-finder
         add_action('rest_api_init', function () {
@@ -33,6 +35,16 @@ class LocalWizEnhancements
                 )
             );
         });
+    }
+
+    function remove_header_footer_css()
+    {
+        if (is_page($this->page_id_to_modify)) {
+            echo '<style>
+                    header { display: none; }
+                    footer { display: none; }
+                  </style>';
+        }
     }
 
     // REST API endpoint callback
@@ -117,6 +129,8 @@ class LocalWizEnhancements
                 'root_url' => get_site_url(),
                 'nonce' => wp_create_nonce('wp_rest')
             );
+
+            $this->page_id_to_modify = get_the_ID();
 
             wp_localize_script('localwiz-enhancements-frontEnd', 'site_url', $site_url);
 

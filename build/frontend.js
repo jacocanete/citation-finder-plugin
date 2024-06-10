@@ -11655,6 +11655,7 @@ function CitationFinder() {
   const [filename, setFilename] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
   const [viewTable, setViewTable] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [items, setItems] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [time, setTime] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
   async function getResults(keyword) {
     try {
       setViewTable(false);
@@ -11683,6 +11684,7 @@ function CitationFinder() {
         let date = new Date();
         let formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
         setFilename(`${formattedDate} ${formData.keyword}.csv`);
+        setTime(parseFloat(data.time));
         setItems(urls);
         setResults(csvUrl);
         setLoading(false);
@@ -11698,6 +11700,7 @@ function CitationFinder() {
       [e.target.name]: e.target.value
     });
   }
+  console.log(time);
   function handleSubmit(e) {
     e.preventDefault();
     getResults(formData.keyword);
@@ -11729,7 +11732,7 @@ function CitationFinder() {
     "aria-hidden": "true"
   }) : "Submit"))), error && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "alert alert-danger"
-  }, error), results && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("hr", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, error), results && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "This task took ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, time), " ", time === 1 ? "second" : "seconds", " to complete."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("hr", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mt-3 d-flex flex-row justify-content-center align-items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, filename), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: results,
@@ -11739,7 +11742,11 @@ function CitationFinder() {
     className: "btn btn-link",
     onClick: e => {
       e.preventDefault();
-      setViewTable(true);
+      if (viewTable) {
+        setViewTable(false);
+      } else {
+        setViewTable(true);
+      }
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__.FaEye, null)))), viewTable && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container"

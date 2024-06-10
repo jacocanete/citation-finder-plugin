@@ -23,6 +23,7 @@ function CitationFinder() {
   const [filename, setFilename] = useState("");
   const [viewTable, setViewTable] = useState(false);
   const [items, setItems] = useState([]);
+  const [time, setTime] = useState(0);
 
   async function getResults(keyword) {
     try {
@@ -60,8 +61,9 @@ function CitationFinder() {
         let formattedDate = `${date.getFullYear()}-${
           date.getMonth() + 1
         }-${date.getDate()}`;
-        setFilename(`${formattedDate} ${formData.keyword}.csv`);
 
+        setFilename(`${formattedDate} ${formData.keyword}.csv`);
+        setTime(parseFloat(data.time));
         setItems(urls);
         setResults(csvUrl);
         setLoading(false);
@@ -78,6 +80,8 @@ function CitationFinder() {
       [e.target.name]: e.target.value,
     });
   }
+
+  console.log(time);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -119,6 +123,10 @@ function CitationFinder() {
       {error && <div className="alert alert-danger">{error}</div>}
       {results && (
         <>
+          <span>
+            This task took <strong>{time}</strong>{" "}
+            {time === 1 ? "second" : "seconds"} to complete.
+          </span>
           <hr />
           <div className="mt-3 d-flex flex-row justify-content-center align-items-center">
             <span>{filename}</span>
@@ -130,7 +138,11 @@ function CitationFinder() {
               className="btn btn-link"
               onClick={(e) => {
                 e.preventDefault();
-                setViewTable(true);
+                if (viewTable) {
+                  setViewTable(false);
+                } else {
+                  setViewTable(true);
+                }
               }}
             >
               <FaEye />
