@@ -21,6 +21,8 @@ class LocalWizEnhancements
         add_action('admin_init', array($this, 'localwiz_enhancements_settings'));
         add_action('init', array($this, 'localwiz_enhancements_assets'));
 
+
+        // Add REST API endpoint http://gosystem7.local/wp-json/localwiz-enhancements/v1/citation-finder
         add_action('rest_api_init', function () {
             register_rest_route(
                 'localwiz-enhancements/v1',
@@ -33,9 +35,24 @@ class LocalWizEnhancements
         });
     }
 
-    function localwiz_enhancements_citation_finder()
+    // REST API endpoint callback
+    function localwiz_enhancements_citation_finder($keyword)
     {
         $curl = curl_init();
+
+        $postFields = json_encode(
+            array(
+                array(
+                    "keyword" => sanitize_text_field($keyword['kw']),
+                    "location_code" => 2840,
+                    "language_code" => "en",
+                    "device" => "desktop",
+                    "os" => "windows",
+                    "depth" => 100
+                )
+            )
+
+        );
 
         curl_setopt_array(
             $curl,
@@ -48,7 +65,7 @@ class LocalWizEnhancements
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => '[ {"keyword":"weather forecast", "location_code":2826, "language_code":"en", "device":"desktop", "os":"windows", "depth":100}]',
+                CURLOPT_POSTFIELDS => $postFields,
                 CURLOPT_HTTPHEADER => array(
                     "Authorization: Basic " . base64_encode(get_option('localwiz-enhancements-username') . ":" . get_option('localwiz-enhancements-password')),
                     "Content-Type: application/json"
@@ -59,9 +76,12 @@ class LocalWizEnhancements
         $response = curl_exec($curl);
         curl_close($curl);
 
-        return $response;
+        $responseArray = json_decode($response, true);
+
+        wp_send_json($responseArray);
     }
 
+    // Enqueue assets
     function localwiz_enhancements_assets()
     {
         wp_register_style('localwiz-enhancements-css', plugin_dir_url(__FILE__) . 'build/index.css');
@@ -76,6 +96,7 @@ class LocalWizEnhancements
         );
     }
 
+    // Render block
     function localwiz_enhancements_render($attributes)
     {
         if (!is_admin()) {
@@ -109,7 +130,7 @@ class LocalWizEnhancements
         <?php return ob_get_clean();
     }
 
-
+    // Settings
     function localwiz_enhancements_settings()
     {
         add_settings_section('localwiz-enhancements-credentials-section', null, null, 'localwiz-enhancements');
