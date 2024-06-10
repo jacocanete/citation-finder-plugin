@@ -56,6 +56,12 @@ class LocalWizEnhancements
 
         $useCredits = false;
 
+        if (get_option('localwiz-enhancements-use-credits') == '1') {
+            $useCredits = true;
+        } else {
+            $useCredits = false;
+        }
+
         $apiUrl = $useCredits ? 'https://api.dataforseo.com/v3/serp/google/organic/live/advanced' : 'https://sandbox.dataforseo.com/v3/serp/google/organic/live/advanced';
 
         curl_setopt_array(
