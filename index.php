@@ -54,10 +54,14 @@ class LocalWizEnhancements
 
         );
 
+        $useCredits = false;
+
+        $apiUrl = $useCredits ? 'https://api.dataforseo.com/v3/serp/google/organic/live/advanced' : 'https://sandbox.dataforseo.com/v3/serp/google/organic/live/advanced';
+
         curl_setopt_array(
             $curl,
             array(
-                CURLOPT_URL => 'https://sandbox.dataforseo.com/v3/serp/google/organic/live/advanced',
+                CURLOPT_URL => $apiUrl,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
@@ -155,7 +159,27 @@ class LocalWizEnhancements
                 'default' => '1234567890'
             )
         );
+
+        // Use credits
+        add_settings_field('localwiz-enhancements-use-credits', 'Use credits', array($this, 'useCreditsHTML'), 'localwiz-enhancements', 'localwiz-enhancements-credentials-section');
+        register_setting(
+            'localwiz-enhancements-credentials-group',
+            'localwiz-enhancements-use-credits',
+            array(
+                'sanitize_callback' => 'sanitize_text_field',
+                'default' => '0'
+            )
+        );
     }
+
+    // Use credits HTML
+    function useCreditsHTML()
+    { ?>
+        <select name="localwiz-enhancements-use-credits" value>
+            <option value="0" <?php selected(get_option('localwiz-enhancements-use-credits'), '0') ?>>False</option>
+            <option value="1" <?php selected(get_option('localwiz-enhancements-use-credits'), '1') ?>>True</option>
+        </select>
+    <?php }
 
     // Username HTML
     function usernameHTML()
