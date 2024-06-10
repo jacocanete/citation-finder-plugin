@@ -150,7 +150,9 @@ class LocalWizEnhancements
         }, 10, 2);
 
         ob_start(); ?>
-        <div class="citation-finder-update">hey</div>
+        <div class="citation-finder-update">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </div>
         <?php return ob_get_clean();
     }
 
