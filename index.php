@@ -3,7 +3,7 @@
 /*
 Plugin Name: LocalWiz Enhancements
 Description: Enhancements for LocalWiz
-Version: 1.2
+Version: 1.2.1
 Author: Jaco Gagarin Canete
 Author URI: jaco-portfolio.me
 */
