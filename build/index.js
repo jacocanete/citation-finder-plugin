@@ -104,7 +104,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ "./src/index.scss");
 
 
-wp.blocks.registerBlockType("localwiz-enhancements/citation-finder", {
+wp.blocks.registerBlockType("citation-finder/main", {
   title: "Citation Finder",
   icon: "search",
   category: "widgets",
