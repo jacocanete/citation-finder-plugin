@@ -1,6 +1,6 @@
 import "./index.scss";
 
-wp.blocks.registerBlockType("localwiz-enhancements/citation-finder", {
+wp.blocks.registerBlockType("citation-finder/main", {
   title: "Citation Finder",
   icon: "search",
   category: "widgets",

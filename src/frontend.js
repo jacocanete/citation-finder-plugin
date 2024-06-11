@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import { TextControl } from "@wordpress/components";
 import axios from "axios";
 import Papa from "papaparse";
 import { FaEye } from "react-icons/fa";
