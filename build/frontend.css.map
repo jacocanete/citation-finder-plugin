@@ -1,1 +1,1 @@
-{"version":3,"file":"frontend.css","mappings":";;;AAAA;EACE;AACF,C","sources":["webpack://lw-enhancements/./src/frontend.scss"],"sourcesContent":[".wp-block-post-title {\r\n  margin-top: 5rem !important;\r\n}\r\n"],"names":[],"sourceRoot":""}
+{"version":3,"file":"frontend.css","mappings":";;;AAAA;EACE;AACF,C","sources":["webpack://citation-finder/./src/frontend.scss"],"sourcesContent":[".wp-block-post-title {\r\n  margin-top: 5rem !important;\r\n}\r\n"],"names":[],"sourceRoot":""}

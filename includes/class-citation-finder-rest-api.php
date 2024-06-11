@@ -1,5 +1,4 @@
 <?php
-
 class Citation_Finder_REST_API
 {
     public function __construct()

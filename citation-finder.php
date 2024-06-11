@@ -1,5 +1,4 @@
 <?php
-
 /*
 Plugin Name: Citation Finder Block
 Description: Citation Finder block for LocalWiz

@@ -1,5 +1,4 @@
 <?php
-
 class Citation_Finder_Admin
 {
     public function __construct()

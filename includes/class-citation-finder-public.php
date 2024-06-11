@@ -1,5 +1,4 @@
 <?php
-
 class Citation_Finder_Public
 {
     public function __construct()
@@ -7,15 +6,14 @@ class Citation_Finder_Public
         add_action('wp_head', array($this, 'remove_header_footer_css'));
         add_action('init', array($this, 'register_block_assets'));
     }
-
     public function register_block_assets()
     {
         wp_register_style('citation-finder-css', CF_PLUGIN_URL . 'build/index.css');
-        wp_register_script('citation-finder-blocks', CF_PLUGIN_URL . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'));
+        wp_register_script('citation-finder-block', CF_PLUGIN_URL . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'));
         register_block_type(
             'citation-finder/main',
             array(
-                'editor_script' => 'citation-finder-blocks',
+                'editor_script' => 'citation-finder-block',
                 'editor_style' => 'citation-finder-css',
                 'render_callback' => array($this, 'citation_finder_render')
             )
